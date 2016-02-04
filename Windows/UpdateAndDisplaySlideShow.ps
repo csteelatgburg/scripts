@@ -6,11 +6,12 @@
 $storageDir = "C:\slideshow"
 
 #specify URL to download the file
-$url = "http://server/path/to/DigitalDisplay.pptx"
+#Use a PPSX file (PowerPoint slideshow) to automatically show the slides
+$url = "http://server/path/to/DigitalDisplay.ppsx"
 
 
 #specify location to save the file
-$file = "$storageDir\slideshow.pptx"
+$file = "$storageDir\slideshow.ppsx"
 
 $webclient = New-Object System.Net.WebClient
 $webclient.DownloadFile($url,$file)
