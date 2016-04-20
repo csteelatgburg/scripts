@@ -1,0 +1,28 @@
+#!/bin.sh
+
+#Install volume license Office package
+# https://github.com/maxschlapfer/MacAdminHelpers/tree/master/Office2016PackageBuilder
+installer -pkg Microsoft_Office_2016_15.21.1_ML.pkg -target /
+
+#Install Outlook auto configuration package
+# https://github.com/talkingmoose/Outlook-Exchange-Setup-5
+installer -pkg OutlookAutoConfig.pkg -target /
+
+#Run dockutil to replace old icons and add new apps
+# https://github.com/kcrawford/dockutil
+declare -a apps=("Microsoft Excel" "Microsoft Word" "Microsoft Outlook" "Microsoft PowerPoint");
+
+for app in "${apps[@]}"
+do
+./dockutil --add "/Applications/$app.app" --replacing "$app" --allhomes;
+done
+
+# Remove Office 2011
+# Make a backup of the folder, just in case
+tar -czf /Users/admin/Desktop/Office2011.tar.gz /Applications/Microsoft\ Office\ 2011/
+
+#Delete the Office 2011 folder from applications
+rm -rf /Applications/Microsoft\ Office\ 2011/
+
+
+exit 0
